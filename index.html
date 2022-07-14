@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/greensock/gsap.min.js"></script>
   </head>
   <body>
@@ -44,7 +45,7 @@
         const randomX =  Math.random()<0.5? Math.random()*-1000-5000:Math.random()*1000+1920;
         const randomY =  Math.random()<0.5? Math.random()*-1000-5000:Math.random()*1000+1920;
         const randomScale =  Math.random()*0.2+0.1;
-        tempHtml+=`<div class="card" style="left:${randomX}px; top:${randomY}px; transform:scale(${randomScale})">
+        tempHtml+=`<div class="card" data-scale="${randomScale}" style="left:${randomX}px; top:${randomY}px; transform:scale(${randomScale})">
         <img src="${imgPath+item.img}" alt="" />
         <div class="info">
           <p class="title">${item.title}</p>
@@ -64,43 +65,19 @@
                         duration:1,
                         stagger:{amount:1.5,from:"random"}
                       })
-    })
-    .catch(function(error){
-      console.log(error);
-    })
-
-    //console.log(temp);
-    // function goSchool() {
-    //   console.log("학원에 갑니다.");
-    // }
-    // function arriveSchool() {
-    //   setTimeout(function () {
-    //     console.log("학원에 도착했습니다.");
-    //   }, 0);
-    // }
-    // function arriveSchoolPromise() {
-    //   return new Promise(function (resolve, reject) {
-    //     setTimeout(function () {
-    //       console.log("학원 떙땡이 쳤습니다.");
-    //       reject("fail");
-    //     }, 5000);
-    //   });
-    // }
-    // function study() {
-    //   console.log("공부를 합니다.");
-    // }
-    // function choono() {
-    //   console.log("잡으러 갑니다. 잡아서 죽일겁니다.");
-    // }
-
-    // goSchool();
-    // arriveSchoolPromise()
-    //   .then(function (data) {
-    //     console.log(data);
-    //     study();
-    //   })
-    //   .catch(function (error) {
-    //     choono(error);
-    //   });
+    $(".card").on("mouseenter", function() {
+      console.log();
+      gsap.to($(this), { scale: "+=0.05", ease: "elastic", duration: 1 });
+    });
+    $(".card").on("mouseleave", function() {
+      console.log($(this));
+      const scale= $(this).data("scale");
+      gsap.to($(this), { scale: scale, ease: "elastic", duration: 1 });
+    });
+    $(".card").on("click", function() {
+      console.log($(this));
+      gsap.to($(this), { scale: "-=0.1", ease: "back", duration: 1 });
+    });
+  });
   </script>
 </html>
