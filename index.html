@@ -12,12 +12,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/greensock/gsap.min.js"></script>
   </head>
   <body>
     <header id="header">
       <h1 class="logo">WHO<strong>AM I</strong></h1>
     </header>
-    <main>
+    <main id="main">
       <div class="card">
         <img src="images/alphabet01.jpg" alt="" />
         <div class="info">
@@ -30,5 +31,68 @@
       </div>
     </main>
   </body>
-  <script></script>
+  <script>
+    const main = document.querySelector("#main");
+    //prettier-ignore
+    fetch("data/alphabet.json")
+    .then( (response) => response.json()    )
+    .then((data)=>{
+      const items = data.items;
+      const imgPath = data.imgPath;
+      let tempHtml="";
+      items.forEach(function(item,idx){
+        const randomX =  Math.random()<0.5? Math.random()*-1000-5000:Math.random()*1000+1920;
+        const randomY =  Math.random()<0.5? Math.random()*-1000-5000:Math.random()*1000+1920;
+        const randomScale =  Math.random()*0.2+0.1;
+        tempHtml+=`<div class="card" style="left:${randomX}px; top:${randomY}px; transform:scale(${randomScale})">
+        <img src="${imgPath+item.img}" alt="" />
+        <div class="info">
+          <p class="title">${item.title}</p>
+          <p class="desc">
+            ${item.desc}
+          </p>
+        </div>
+      </div>`
+      });
+      main.innerHTML=tempHtml;
+      gsap.to(".card",{left:Math.random()*500+1920/2,top:Math.random()*200+970/2,ease:"power4",stagger:{each:0.1}})
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+
+    //console.log(temp);
+    // function goSchool() {
+    //   console.log("학원에 갑니다.");
+    // }
+    // function arriveSchool() {
+    //   setTimeout(function () {
+    //     console.log("학원에 도착했습니다.");
+    //   }, 0);
+    // }
+    // function arriveSchoolPromise() {
+    //   return new Promise(function (resolve, reject) {
+    //     setTimeout(function () {
+    //       console.log("학원 떙땡이 쳤습니다.");
+    //       reject("fail");
+    //     }, 5000);
+    //   });
+    // }
+    // function study() {
+    //   console.log("공부를 합니다.");
+    // }
+    // function choono() {
+    //   console.log("잡으러 갑니다. 잡아서 죽일겁니다.");
+    // }
+
+    // goSchool();
+    // arriveSchoolPromise()
+    //   .then(function (data) {
+    //     console.log(data);
+    //     study();
+    //   })
+    //   .catch(function (error) {
+    //     choono(error);
+    //   });
+  </script>
 </html>
