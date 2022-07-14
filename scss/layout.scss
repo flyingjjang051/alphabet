@@ -42,6 +42,9 @@ a {
   }
 }
 #main {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 .card {
   padding: 10px;

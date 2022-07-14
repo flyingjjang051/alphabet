@@ -55,7 +55,7 @@
       </div>`
       });
       main.innerHTML=tempHtml;
-      gsap.to(".card",{left:Math.random()*500+1920/2,top:Math.random()*200+970/2,ease:"power4",stagger:{each:0.1}})
+      gsap.to(".card",{left:()=> Math.random()*1300+200,top:()=> Math.random()*400+100,rotation:()=>Math.random()*180-360,ease:"power4",stagger:{each:0.05}})
     })
     .catch(function(error){
       console.log(error);

@@ -32,6 +32,12 @@ a {
   font-weight: 700;
 }
 
+#main {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
 .card {
   padding: 10px;
   background-color: #fff;
