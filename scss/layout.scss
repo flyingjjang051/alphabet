@@ -62,11 +62,12 @@ a {
     bottom: 10px;
     left: 10px;
     right: 10px;
-    height: 200px;
+    height: 0;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
-    padding: 30px;
+    padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
     .title {
       font-size: 36px;
       font-weight: 700;
