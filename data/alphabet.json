@@ -1,0 +1,131 @@
+{
+  "imgPath": "images/",
+  "items": [
+    {
+      "img": "alphabet01.jpg",
+      "title": "ALCOHOL",
+      "bg": "radial-gradient( circle 929px at 0.6% 1.3%,  rgba(248,251,10,1) 0%, rgba(248,47,47,1) 82.6% )",
+      "desc": "소주 1병 / 맥주 1000cc \r\n 더 이상 마시면 정신줄 놓음..."
+    },
+    {
+      "img": "alphabet02.jpg",
+      "title": "BLOOD TYPE",
+      "bg": "linear-gradient( 108.7deg,  rgba(34,219,231,1) -0.9%, rgba(52,118,246,1) 88.7% )",
+      "desc": "AAA형 소심 그자체..."
+    },
+    {
+      "img": "alphabet03.jpg",
+      "title": "CHARACTER",
+      "bg": "linear-gradient( 110.6deg,  rgba(179,157,219,1) 7%, rgba(150,159,222,1) 47.7%, rgba(24,255,255,1) 100.6% )",
+      "desc": "성격 완전 더러움. 건드리면 물어버림.... 왈왈왈"
+    },
+    {
+      "img": "alphabet01.jpg",
+      "title": "ALCOHOL",
+      "bg": "radial-gradient( circle 929px at 0.6% 1.3%,  rgba(248,251,10,1) 0%, rgba(248,47,47,1) 82.6% )",
+      "desc": "소주 1병 / 맥주 1000cc \r\n 더 이상 마시면 정신줄 놓음..."
+    },
+    {
+      "img": "alphabet02.jpg",
+      "title": "BLOOD TYPE",
+      "bg": "linear-gradient( 108.7deg,  rgba(34,219,231,1) -0.9%, rgba(52,118,246,1) 88.7% )",
+      "desc": "AAA형 소심 그자체..."
+    },
+    {
+      "img": "alphabet03.jpg",
+      "title": "CHARACTER",
+      "bg": "linear-gradient( 110.6deg,  rgba(179,157,219,1) 7%, rgba(150,159,222,1) 47.7%, rgba(24,255,255,1) 100.6% )",
+      "desc": "성격 완전 더러움. 건드리면 물어버림.... 왈왈왈"
+    },
+    {
+      "img": "alphabet01.jpg",
+      "title": "ALCOHOL",
+      "bg": "radial-gradient( circle 929px at 0.6% 1.3%,  rgba(248,251,10,1) 0%, rgba(248,47,47,1) 82.6% )",
+      "desc": "소주 1병 / 맥주 1000cc \r\n 더 이상 마시면 정신줄 놓음..."
+    },
+    {
+      "img": "alphabet02.jpg",
+      "title": "BLOOD TYPE",
+      "bg": "linear-gradient( 108.7deg,  rgba(34,219,231,1) -0.9%, rgba(52,118,246,1) 88.7% )",
+      "desc": "AAA형 소심 그자체..."
+    },
+    {
+      "img": "alphabet03.jpg",
+      "title": "CHARACTER",
+      "bg": "linear-gradient( 110.6deg,  rgba(179,157,219,1) 7%, rgba(150,159,222,1) 47.7%, rgba(24,255,255,1) 100.6% )",
+      "desc": "성격 완전 더러움. 건드리면 물어버림.... 왈왈왈"
+    },
+    {
+      "img": "alphabet01.jpg",
+      "title": "ALCOHOL",
+      "bg": "radial-gradient( circle 929px at 0.6% 1.3%,  rgba(248,251,10,1) 0%, rgba(248,47,47,1) 82.6% )",
+      "desc": "소주 1병 / 맥주 1000cc \r\n 더 이상 마시면 정신줄 놓음..."
+    },
+    {
+      "img": "alphabet02.jpg",
+      "title": "BLOOD TYPE",
+      "bg": "linear-gradient( 108.7deg,  rgba(34,219,231,1) -0.9%, rgba(52,118,246,1) 88.7% )",
+      "desc": "AAA형 소심 그자체..."
+    },
+    {
+      "img": "alphabet03.jpg",
+      "title": "CHARACTER",
+      "bg": "linear-gradient( 110.6deg,  rgba(179,157,219,1) 7%, rgba(150,159,222,1) 47.7%, rgba(24,255,255,1) 100.6% )",
+      "desc": "성격 완전 더러움. 건드리면 물어버림.... 왈왈왈"
+    },
+    {
+      "img": "alphabet01.jpg",
+      "title": "ALCOHOL",
+      "bg": "radial-gradient( circle 929px at 0.6% 1.3%,  rgba(248,251,10,1) 0%, rgba(248,47,47,1) 82.6% )",
+      "desc": "소주 1병 / 맥주 1000cc \r\n 더 이상 마시면 정신줄 놓음..."
+    },
+    {
+      "img": "alphabet02.jpg",
+      "title": "BLOOD TYPE",
+      "bg": "linear-gradient( 108.7deg,  rgba(34,219,231,1) -0.9%, rgba(52,118,246,1) 88.7% )",
+      "desc": "AAA형 소심 그자체..."
+    },
+    {
+      "img": "alphabet03.jpg",
+      "title": "CHARACTER",
+      "bg": "linear-gradient( 110.6deg,  rgba(179,157,219,1) 7%, rgba(150,159,222,1) 47.7%, rgba(24,255,255,1) 100.6% )",
+      "desc": "성격 완전 더러움. 건드리면 물어버림.... 왈왈왈"
+    },
+    {
+      "img": "alphabet01.jpg",
+      "title": "ALCOHOL",
+      "bg": "radial-gradient( circle 929px at 0.6% 1.3%,  rgba(248,251,10,1) 0%, rgba(248,47,47,1) 82.6% )",
+      "desc": "소주 1병 / 맥주 1000cc \r\n 더 이상 마시면 정신줄 놓음..."
+    },
+    {
+      "img": "alphabet02.jpg",
+      "title": "BLOOD TYPE",
+      "bg": "linear-gradient( 108.7deg,  rgba(34,219,231,1) -0.9%, rgba(52,118,246,1) 88.7% )",
+      "desc": "AAA형 소심 그자체..."
+    },
+    {
+      "img": "alphabet03.jpg",
+      "title": "CHARACTER",
+      "bg": "linear-gradient( 110.6deg,  rgba(179,157,219,1) 7%, rgba(150,159,222,1) 47.7%, rgba(24,255,255,1) 100.6% )",
+      "desc": "성격 완전 더러움. 건드리면 물어버림.... 왈왈왈"
+    },
+    {
+      "img": "alphabet01.jpg",
+      "title": "ALCOHOL",
+      "bg": "radial-gradient( circle 929px at 0.6% 1.3%,  rgba(248,251,10,1) 0%, rgba(248,47,47,1) 82.6% )",
+      "desc": "소주 1병 / 맥주 1000cc \r\n 더 이상 마시면 정신줄 놓음..."
+    },
+    {
+      "img": "alphabet02.jpg",
+      "title": "BLOOD TYPE",
+      "bg": "linear-gradient( 108.7deg,  rgba(34,219,231,1) -0.9%, rgba(52,118,246,1) 88.7% )",
+      "desc": "AAA형 소심 그자체..."
+    },
+    {
+      "img": "alphabet03.jpg",
+      "title": "CHARACTER",
+      "bg": "linear-gradient( 110.6deg,  rgba(179,157,219,1) 7%, rgba(150,159,222,1) 47.7%, rgba(24,255,255,1) 100.6% )",
+      "desc": "성격 완전 더러움. 건드리면 물어버림.... 왈왈왈"
+    }
+  ]
+}
