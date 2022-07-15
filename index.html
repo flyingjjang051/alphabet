@@ -48,6 +48,16 @@
 
     const main = document.querySelector("#main");
     let depth = 0;
+    let clickedCard = null;
+    const smallValue = {
+      scale: () => Math.random() * 0.2 + 0.1,
+      rotation: () => Math.random() * 180 - 360,
+      left: () => Math.random() * 1000 + 100,
+      top: () => Math.random() * 500 + 50,
+      ease: "power4",
+      duration: 0.5,
+    };
+    const bigValue = { scale: 1, rotation: 0, left: 1920 / 2 - 300, top: 1080 / 2 - 300, ease: "power4", duration: 0.5 };
     //prettier-ignore
     fetch("data/alphabet.json")
     .then((response) => response.json())
@@ -82,6 +92,7 @@
     const cards = document.querySelectorAll(".card");
     console.log(cards);
     function enterFunc(item) {
+      console.log(item.dataset);
       gsap.to(item, { scale: "+=0.1", ease: "elastic", duration: 1 });
     }
     function leaveFunc(item) {
@@ -93,24 +104,24 @@
     }
     
     cards.forEach(function(item,idx){
-      //item.addEventListener("mouseenter",enterFunc(this));
-      //item.addEventListener("mouseleave",leaveFunc(this));
+      
       item.addEventListener("click",function(){
-        //const originScale = this.dataset.scale;
-        //this.removeEventListener("mouseenter",null);
-        //this.removeEventListener("mouseleave",null);
+        
         depth++;
         gsap.set(this, { zIndex:depth });
         if(this.classList.contains("small")){
           this.classList.remove("small");
-          gsap.to(this, { scale: 1,rotation:0,left:1920/2-300,top:1080/2-300, ease: "power4", duration: 0.5 });
+          gsap.to(this, bigValue);
         } else {
           this.classList.add("small");
-          gsap.to(this, { scale: Math.random()*0.2+0.1,
-                          rotation:Math.random()*180-360,
-                          left:Math.random()*1000+100,
-                          top:Math.random()*500+50, ease: "power4", duration: 0.5 });
+          gsap.to(this, smallValue);
         }
+        if(clickedCard!==null && this!==clickedCard && !clickedCard.classList.contains("small")) {
+          gsap.to(clickedCard, smallValue);
+          clickedCard.classList.add("small");
+        }
+        clickedCard = this;
+        console.log(clickedCard);
       })
     })
     
