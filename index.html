@@ -56,6 +56,22 @@
     let depth = 0;
     let clickedCard = null;
     let total = 0;
+    function enterFunc() {
+      gsap.to(this, { scale: "+=0.1", ease: "elastic", duration: 1 });
+    }
+    function leaveFunc() {
+      console.log(this);
+      const originScale = this.dataset.scale;
+      gsap.to(this, { scale: originScale, ease: "power4", duration: 0.5 });
+    }
+    // function enterFunc(e) {
+    //   gsap.to(e.currentTarget, { scale: "+=0.1", ease: "elastic", duration: 1 });
+    // }
+    // function leaveFunc(e) {
+    //   const originScale = e.currentTarget.dataset.scale;
+    //   gsap.to(e.currentTarget, { scale: originScale, ease: "elastic", duration: 1 });
+    // }
+
     const smallValue = {
       scale: () => Math.random() * 0.2 + 0.1, // function() {return Math.random() * 0.2 + 0.1}
       rotation: () => Math.random() * 180 - 360,
@@ -63,6 +79,11 @@
       top: () => Math.random() * 500 + 50,
       ease: "power4",
       duration: 0.5,
+      // onComplete: function () {
+      //   console.log(clickedCard);
+      //   clickedCard.addEventListener("mouseenter", enterFunc);
+      //   clickedCard.addEventListener("mouseleave", leaveFunc);
+      // },
     };
     const bigValue = {
       scale: 1,
@@ -78,93 +99,90 @@
     };
     //prettier-ignore
     fetch("data/alphabet.json")
-    .then((response) => response.json())
-    .then((data)=>{
-      const items = data.items;
-      const imgPath = data.imgPath;
-      let tempHtml="";
-      total = items.length;
-      console.log(total);
-      items.forEach(function(item,idx){
-        const randomX =  Math.random()<0.5? Math.random()*-1000-500:Math.random()*1000+1920;
-        const randomY =  Math.random()<0.5? Math.random()*-1000-500:Math.random()*1000+1920;
-        const randomScale =  Math.random()*0.2+0.1;
-        tempHtml+=`<div class="card small" data-scale="${randomScale}" style="left:${randomX}px; top:${randomY}px; transform:scale(${randomScale})">
-        <img src="${imgPath+item.img}" alt="" />
-        <div class="info">
-          <p class="title">${item.title}</p>
-          <p class="desc">
-            ${item.desc}
-          </p>
-        </div>
-      </div>`
-      });
-      main.innerHTML=tempHtml;
-      //prettier-ignore
-      gsap.to(".card",{
-                        left:()=> Math.random()*1000+100, // 200~1500
-                        top:()=> Math.random()*500+50,   // 100~600
-                        rotation:()=>Math.random()*180-360,
-                        ease:"power4",
-                        duration:1,
-                        stagger:{amount:1.5,from:"random"}
-                      });
-    const cards = document.querySelectorAll(".card");
-    console.log(cards);
-    function enterFunc(item) {
-      console.log(item.dataset);
-      gsap.to(item, { scale: "+=0.1", ease: "elastic", duration: 1 });
-    }
-    function leaveFunc(item) {
-      console.log(item.dataset);
-      if(item.dataset.scale!==undefined) {
-        const originScale = item.dataset.scale;
-        gsap.to(item, { scale: originScale, ease: "elastic", duration: 1 });
-      }
-    }
-    
-    cards.forEach(function(item,idx){
-      
-      item.addEventListener("click",function(){
-        cardIdx = idx+1;
-        console.log(cardIdx);
-        depth++;
-        gsap.set(this, { zIndex:depth });
-        if(this.classList.contains("small")){
-          this.classList.remove("small");
-          gsap.to(this, bigValue);
-        } else {
-          this.classList.add("small");
-          gsap.to(this, smallValue);
-          const info = this.querySelector(".info");
-          gsap.to(info,{bottom:"-100%"});
-        }
-        if(clickedCard!==null && this!==clickedCard && !clickedCard.classList.contains("small")) {
-          gsap.to(clickedCard, smallValue);
-          clickedCard.classList.add("small");
-          const info = clickedCard.querySelector(".info");
-          gsap.to(info,{bottom:"-100%"});
-        }
-        clickedCard = this;
-        console.log(clickedCard);
+      .then((response) => response.json())
+      .then((data)=>{
+        const items = data.items;
+        const imgPath = data.imgPath;
+        let tempHtml="";
+        total = items.length;
+        console.log(total);
+        items.forEach(function(item,idx){
+          const randomX =  Math.random()<0.5? Math.random()*-1000-500:Math.random()*1000+1920;
+          const randomY =  Math.random()<0.5? Math.random()*-1000-500:Math.random()*1000+1920;
+          const randomScale =  Math.random()*0.2+0.1;
+          tempHtml+=`<div class="card small" data-scale="${randomScale}" style="left:${randomX}px; top:${randomY}px; transform:scale(${randomScale})">
+          <img src="${imgPath+item.img}" alt="" />
+          <div class="info">
+            <p class="title">${item.title}</p>
+            <p class="desc">
+              ${item.desc}
+            </p>
+          </div>
+        </div>`
+        });
+        main.innerHTML=tempHtml;
+        //prettier-ignore
+        gsap.to(".card",{
+                          left:()=> Math.random()*1000+100, // 200~1500
+                          top:()=> Math.random()*500+50,   // 100~600
+                          rotation:()=>Math.random()*180-360,
+                          ease:"power4",
+                          duration:1,
+                          stagger:{amount:1.5,from:"random"}
+                        });
+      const cards = document.querySelectorAll(".card");
+      console.log(cards);
+
+
+      cards.forEach(function(item,idx){
+        item.addEventListener("mouseenter",enterFunc);
+        item.addEventListener("mouseleave",leaveFunc);
+
+        item.addEventListener("click",function(){
+          this.removeEventListener("mouseenter",enterFunc);
+          this.removeEventListener("mouseleave",leaveFunc);
+          cardIdx = idx+1;
+          console.log(cardIdx);
+          depth++;
+          gsap.set(this, { zIndex:depth });
+          if(this.classList.contains("small")){
+            this.classList.remove("small");
+            gsap.to(this, bigValue);
+          } else {
+            this.classList.add("small");
+            gsap.to(this, smallValue);
+            const info = this.querySelector(".info");
+            gsap.to(info,{bottom:"-100%"});
+            this.addEventListener("mouseenter",enterFunc);
+            this.addEventListener("mouseleave",leaveFunc);
+          }
+          if(clickedCard!==null && this!==clickedCard && !clickedCard.classList.contains("small")) {
+            gsap.to(clickedCard, smallValue);
+            clickedCard.classList.add("small");
+            const info = clickedCard.querySelector(".info");
+            gsap.to(info,{bottom:"-100%"});
+            clickedCard.addEventListener("mouseenter",enterFunc);
+            clickedCard.addEventListener("mouseleave",leaveFunc);
+          }
+          clickedCard = this;
+        })
       })
-    })
-    
-    // $(".card").on("mouseenter", (e)=> {
-    //   console.log(e.currentTarget);
-    //   gsap.to(e.currentTarget, { scale: "+=0.05", ease: "elastic", duration: 1 });
-    // });
-    // $(".card").on("mouseleave", function() {
-    //   console.log($(this));
-    //   const scale= $(this).data("scale");
-    //   gsap.to($(this), { scale: scale, ease: "elastic", duration: 1 });
-    // });
-    // $(".card").on("click", function() {
-    //   console.log($(this));
-    //   gsap.to($(this), { scale: "-=0.1", ease: "back", duration: 1 });
-    // });
-    
-  });
+
+      // $(".card").on("mouseenter", (e)=> {
+      //   console.log(e.currentTarget);
+      //   gsap.to(e.currentTarget, { scale: "+=0.05", ease: "elastic", duration: 1 });
+      // });
+      // $(".card").on("mouseleave", function() {
+      //   console.log($(this));
+      //   const scale= $(this).data("scale");
+      //   gsap.to($(this), { scale: scale, ease: "elastic", duration: 1 });
+      // });
+      // $(".card").on("click", function() {
+      //   console.log($(this));
+      //   gsap.to($(this), { scale: "-=0.1", ease: "back", duration: 1 });
+      // });
+
+    });
     // let cardIdx = 0;
     // const next = document.querySelector(".btns .next");
     // const prev = document.querySelector(".btns .prev");
@@ -187,19 +205,17 @@
     const next = document.querySelector(".btns .next");
     const prev = document.querySelector(".btns .prev");
     next.addEventListener("click", function () {
-      // cardIdx++;
-      // gsap.to(`.card:nth-child(${cardIdx})`, bigValue);
       cardIdx++;
       if (cardIdx >= 27) {
         cardIdx = 1;
       }
+      // const currentCard = document.querySelector(`.card:nth-child(${cardIdx})`);
+      // currentCard.dispatchEvent(new Event("click"));
       const currentCard = document.querySelector(`.card:nth-child(${cardIdx})`);
       currentCard.dispatchEvent(new Event("click"));
     });
 
     prev.addEventListener("click", function () {
-      // cardIdx++;
-      // gsap.to(`.card:nth-child(${cardIdx})`, bigValue);
       cardIdx--;
       if (cardIdx <= 0) {
         cardIdx = 26;
