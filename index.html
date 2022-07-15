@@ -57,11 +57,11 @@
     let clickedCard = null;
     let total = 0;
     function enterFunc() {
-      gsap.to(this, { scale: "+=0.1", ease: "elastic", duration: 1 });
+      const originScale = parseFloat(this.dataset.scale);
+      gsap.to(this, { scale: originScale + 0.1, ease: "elastic", duration: 1 });
     }
     function leaveFunc() {
-      console.log(this);
-      const originScale = this.dataset.scale;
+      const originScale = parseFloat(this.dataset.scale);
       gsap.to(this, { scale: originScale, ease: "power4", duration: 0.5 });
     }
     // function enterFunc(e) {
@@ -93,6 +93,7 @@
       ease: "power4",
       duration: 0.5,
       onComplete: function () {
+        console.log(this);
         const info = clickedCard.querySelector(".info");
         gsap.to(info, { bottom: 10 });
       },
@@ -139,6 +140,7 @@
         item.addEventListener("mouseleave",leaveFunc);
 
         item.addEventListener("click",function(){
+          console.log(this);
           this.removeEventListener("mouseenter",enterFunc);
           this.removeEventListener("mouseleave",leaveFunc);
           cardIdx = idx+1;
@@ -150,6 +152,7 @@
             gsap.to(this, bigValue);
           } else {
             this.classList.add("small");
+            this.dataset.scale = smallValue.scale();
             gsap.to(this, smallValue);
             const info = this.querySelector(".info");
             gsap.to(info,{bottom:"-100%"});
@@ -161,6 +164,7 @@
             clickedCard.classList.add("small");
             const info = clickedCard.querySelector(".info");
             gsap.to(info,{bottom:"-100%"});
+            clickedCard.dataset.scale = smallValue.scale();
             clickedCard.addEventListener("mouseenter",enterFunc);
             clickedCard.addEventListener("mouseleave",leaveFunc);
           }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log(window === this);
+      //렉시컬 스코프
+      var hamberger = "버거킹";
+      var name = "윤도우";
+      const kim = {
+        name: "김배우",
+      };
+      const jang = {
+        name: "장성호",
+        hamberger: "맥도널드",
+        jangEatHamberger: eatHamberger,
+        coding: function (language, time) {
+          console.log(`${this.name}가 열심히 ${language}코딩을 ${time}째 하고 있습니다.`);
+        },
+        arrowEatHamberger: () => {
+          console.log(`${this.name}가 ${this.hamberger} 햄버거를 먹습니다.`);
+        },
+      };
+      function eatHamberger() {
+        console.log(this);
+        console.log(`${this.name}가 ${this.hamberger} 햄버거를 먹습니다.`);
+      }
+      jang.coding("리액트", "1시간");
+      jang.coding.call(kim, "자바스크립트", "1시간");
+      jang.coding.apply(kim, ["파이썬", "1시간"]);
+      let hardCoding = jang.coding.bind(kim, "자바스크립트", "2시간");
+      hardCoding();
+      //eatHamberger();
+      //jang.arrowEatHamberger();
+    </script>
+  </body>
+</html>
