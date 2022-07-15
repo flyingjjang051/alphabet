@@ -33,19 +33,33 @@
     </main>
   </body>
   <script>
+    //async, await
+    // const promise = new Promise(function (resolve, reject) {
+    //   Math.random() < 0.5 ? resolve("성공") : reject("실패");
+    //   //resolve("성공");
+    // });
+    // promise
+    //   .then(function (data) {
+    //     console.log(data);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
     const main = document.querySelector("#main");
+    let depth = 0;
     //prettier-ignore
     fetch("data/alphabet.json")
-    .then( (response) => response.json()    )
+    .then((response) => response.json())
     .then((data)=>{
       const items = data.items;
       const imgPath = data.imgPath;
       let tempHtml="";
       items.forEach(function(item,idx){
-        const randomX =  Math.random()<0.5? Math.random()*-1000-5000:Math.random()*1000+1920;
-        const randomY =  Math.random()<0.5? Math.random()*-1000-5000:Math.random()*1000+1920;
+        const randomX =  Math.random()<0.5? Math.random()*-1000-500:Math.random()*1000+1920;
+        const randomY =  Math.random()<0.5? Math.random()*-1000-500:Math.random()*1000+1920;
         const randomScale =  Math.random()*0.2+0.1;
-        tempHtml+=`<div class="card" data-scale="${randomScale}" style="left:${randomX}px; top:${randomY}px; transform:scale(${randomScale})">
+        tempHtml+=`<div class="card small" data-scale="${randomScale}" style="left:${randomX}px; top:${randomY}px; transform:scale(${randomScale})">
         <img src="${imgPath+item.img}" alt="" />
         <div class="info">
           <p class="title">${item.title}</p>
@@ -58,26 +72,62 @@
       main.innerHTML=tempHtml;
       //prettier-ignore
       gsap.to(".card",{
-                        left:()=> Math.random()*1300+200,
-                        top:()=> Math.random()*400+100,
+                        left:()=> Math.random()*1000+100, // 200~1500
+                        top:()=> Math.random()*500+50,   // 100~600
                         rotation:()=>Math.random()*180-360,
                         ease:"power4",
                         duration:1,
                         stagger:{amount:1.5,from:"random"}
-                      })
-    $(".card").on("mouseenter", function() {
-      console.log();
-      gsap.to($(this), { scale: "+=0.05", ease: "elastic", duration: 1 });
-    });
-    $(".card").on("mouseleave", function() {
-      console.log($(this));
-      const scale= $(this).data("scale");
-      gsap.to($(this), { scale: scale, ease: "elastic", duration: 1 });
-    });
-    $(".card").on("click", function() {
-      console.log($(this));
-      gsap.to($(this), { scale: "-=0.1", ease: "back", duration: 1 });
-    });
+                      });
+    const cards = document.querySelectorAll(".card");
+    console.log(cards);
+    function enterFunc(item) {
+      gsap.to(item, { scale: "+=0.1", ease: "elastic", duration: 1 });
+    }
+    function leaveFunc(item) {
+      console.log(item.dataset);
+      if(item.dataset.scale!==undefined) {
+        const originScale = item.dataset.scale;
+        gsap.to(item, { scale: originScale, ease: "elastic", duration: 1 });
+      }
+    }
+    
+    cards.forEach(function(item,idx){
+      //item.addEventListener("mouseenter",enterFunc(this));
+      //item.addEventListener("mouseleave",leaveFunc(this));
+      item.addEventListener("click",function(){
+        //const originScale = this.dataset.scale;
+        //this.removeEventListener("mouseenter",null);
+        //this.removeEventListener("mouseleave",null);
+        depth++;
+        gsap.set(this, { zIndex:depth });
+        if(this.classList.contains("small")){
+          this.classList.remove("small");
+          gsap.to(this, { scale: 1,rotation:0,left:1920/2-300,top:1080/2-300, ease: "power4", duration: 0.5 });
+        } else {
+          this.classList.add("small");
+          gsap.to(this, { scale: Math.random()*0.2+0.1,
+                          rotation:Math.random()*180-360,
+                          left:Math.random()*1000+100,
+                          top:Math.random()*500+50, ease: "power4", duration: 0.5 });
+        }
+      })
+    })
+    
+    // $(".card").on("mouseenter", (e)=> {
+    //   console.log(e.currentTarget);
+    //   gsap.to(e.currentTarget, { scale: "+=0.05", ease: "elastic", duration: 1 });
+    // });
+    // $(".card").on("mouseleave", function() {
+    //   console.log($(this));
+    //   const scale= $(this).data("scale");
+    //   gsap.to($(this), { scale: scale, ease: "elastic", duration: 1 });
+    // });
+    // $(".card").on("click", function() {
+    //   console.log($(this));
+    //   gsap.to($(this), { scale: "-=0.1", ease: "back", duration: 1 });
+    // });
+    
   });
   </script>
 </html>
