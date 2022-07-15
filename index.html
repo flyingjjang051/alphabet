@@ -16,6 +16,7 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/greensock/gsap.min.js"></script>
     <script src="js/splitting.min.js"></script>
+    <script src="js/lodash.js"></script>
   </head>
   <body>
     <header id="header">
@@ -57,10 +58,12 @@
     let clickedCard = null;
     let total = 0;
     function enterFunc() {
+      gsap.killTweensOf(this);
       const originScale = parseFloat(this.dataset.scale);
       gsap.to(this, { scale: originScale + 0.1, ease: "elastic", duration: 1 });
     }
     function leaveFunc() {
+      gsap.killTweensOf(this);
       const originScale = parseFloat(this.dataset.scale);
       gsap.to(this, { scale: originScale, ease: "power4", duration: 0.5 });
     }
@@ -79,15 +82,15 @@
       top: () => Math.random() * 500 + 50,
       ease: "power4",
       duration: 0.5,
-      // onComplete: function () {
-      //   console.log(clickedCard);
-      //   clickedCard.addEventListener("mouseenter", enterFunc);
-      //   clickedCard.addEventListener("mouseleave", leaveFunc);
-      // },
+      onComplete: function () {
+        console.log(clickedCard);
+        clickedCard.addEventListener("mouseenter", enterFunc);
+        clickedCard.addEventListener("mouseleave", leaveFunc);
+      },
     };
     const bigValue = {
       scale: 1,
-      rotation: 0,
+      rotation: "0_short",
       left: 1920 / 2 - 300,
       top: 1080 / 2 - 400,
       ease: "power4",
@@ -140,9 +143,9 @@
         item.addEventListener("mouseleave",leaveFunc);
 
         item.addEventListener("click",function(){
-          console.log(this);
           this.removeEventListener("mouseenter",enterFunc);
           this.removeEventListener("mouseleave",leaveFunc);
+          gsap.killTweensOf(this);
           cardIdx = idx+1;
           console.log(cardIdx);
           depth++;
@@ -156,8 +159,8 @@
             gsap.to(this, smallValue);
             const info = this.querySelector(".info");
             gsap.to(info,{bottom:"-100%"});
-            this.addEventListener("mouseenter",enterFunc);
-            this.addEventListener("mouseleave",leaveFunc);
+            //this.addEventListener("mouseenter",enterFunc);
+            //this.addEventListener("mouseleave",leaveFunc);
           }
           if(clickedCard!==null && this!==clickedCard && !clickedCard.classList.contains("small")) {
             gsap.to(clickedCard, smallValue);
@@ -165,8 +168,8 @@
             const info = clickedCard.querySelector(".info");
             gsap.to(info,{bottom:"-100%"});
             clickedCard.dataset.scale = smallValue.scale();
-            clickedCard.addEventListener("mouseenter",enterFunc);
-            clickedCard.addEventListener("mouseleave",leaveFunc);
+            //clickedCard.addEventListener("mouseenter",enterFunc);
+            //clickedCard.addEventListener("mouseleave",leaveFunc);
           }
           clickedCard = this;
         })
