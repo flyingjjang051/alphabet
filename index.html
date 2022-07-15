@@ -126,7 +126,8 @@
     cards.forEach(function(item,idx){
       
       item.addEventListener("click",function(){
-        
+        cardIdx = idx+1;
+        console.log(cardIdx);
         depth++;
         gsap.set(this, { zIndex:depth });
         if(this.classList.contains("small")){
